@@ -19,11 +19,22 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script>
+        window.Laravel = <?php echo json_encode([
+	'csrfToken' => csrf_token(),
+	'user' => [
+		'id' => Auth::check() ? Auth::user()->id : null,
+		'following' => Auth::check() ? Auth::user()->following()->pluck('users.id') : null,
+	],
+]);
+?>
+    </script>
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>

@@ -33,8 +33,11 @@ class App extends Component {
 
     componentDidMount() {
         Echo.private('new-post').listen('PostCreated', e => {
-            console.log('from pusher', e.post);
-            this.setState({ posts: [e.post, ...this.state.posts] });
+            // console.log('from pusher', e.post);
+            // this.setState({ posts: [e.post, ...this.state.posts] });
+            if (window.Laravel.user.following.includes(e.post.user_id)) {
+                this.setState({ posts: [e.post, ...this.state.posts] });
+            }
         });
         // this.interval = setInterval(() => this.getPosts(), 100000);
     }
@@ -52,7 +55,7 @@ class App extends Component {
             })
             .then(response => {
                 // console
-                console.log('from handle submit', response);
+                // console.log('from handle submit', response);
                 // set state
                 this.setState({
                     posts: [response.data, ...this.state.posts],

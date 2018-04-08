@@ -14125,7 +14125,7 @@ window.Pusher = __webpack_require__(44);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
-  key: "15753f831ef4a6ad5c1d",
+  key: "58123a9bd01d04f3058f",
   cluster: "ap1",
   encrypted: true
 });
@@ -58653,8 +58653,11 @@ var App = function (_Component) {
             var _this3 = this;
 
             Echo.private('new-post').listen('PostCreated', function (e) {
-                console.log('from pusher', e.post);
-                _this3.setState({ posts: [e.post].concat(_toConsumableArray(_this3.state.posts)) });
+                // console.log('from pusher', e.post);
+                // this.setState({ posts: [e.post, ...this.state.posts] });
+                if (window.Laravel.user.following.includes(e.post.user_id)) {
+                    _this3.setState({ posts: [e.post].concat(_toConsumableArray(_this3.state.posts)) });
+                }
             });
             // this.interval = setInterval(() => this.getPosts(), 100000);
         }
@@ -58674,7 +58677,7 @@ var App = function (_Component) {
                 body: this.state.body
             }).then(function (response) {
                 // console
-                console.log('from handle submit', response);
+                // console.log('from handle submit', response);
                 // set state
                 _this4.setState({
                     posts: [response.data].concat(_toConsumableArray(_this4.state.posts)),
