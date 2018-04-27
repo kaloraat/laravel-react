@@ -11,6 +11,14 @@
             <a href="{{ route('users.follow', $user) }}" class="btn btn-success">Follow</a>
         @endif
     @endif
+    <br><br>
+    @foreach($user->posts as $post)
+    <div>
+        <div class="lead">{{ $post->body }}</div>
+        <div class="text-muted">{{ $post->humanCreatedAt }}</div>
+        <hr>
+    </div>
+    @endforeach
 
 </div>
 @endsection

@@ -101,7 +101,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row justify-content-center">
                     <div className="col-md-6">
                         <div className="card">
@@ -126,13 +126,15 @@ class App extends Component {
                         </div>
                     </div>
 
-                    <div className="col-md-6">
-                        <div className="card">
-                            <div className="card-header">Recent tweets</div>
-                            {!this.state.loading ? this.renderPosts() : 'Loading'}
-                            <div className="card-body" />
+                    {this.state.posts.length > 0 && (
+                        <div className="col-md-6">
+                            <div className="card">
+                                <div className="card-header">Recent tweets</div>
+                                {!this.state.loading ? this.renderPosts() : 'Loading'}
+                                <div className="card-body" />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
             </div>
         );
