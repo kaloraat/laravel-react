@@ -18,7 +18,7 @@
         </div>
 
         <div class="col-md-4">
-            @if(Auth::user()->followers->count())<h4>Following</h4>@endif
+            @if(Auth::user()->followers->count())<h4>Followers</h4>@endif
             @foreach($followers as $user)
                 <span><a href="{{ route('users', $user) }}" class="btn btn-sm btn-outline-success">{{ $user->username }}</a></span>
             @endforeach
